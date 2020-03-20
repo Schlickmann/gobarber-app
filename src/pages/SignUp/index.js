@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SafeAreaView, Text, Button } from 'react-native';
+import { Text, Button } from 'react-native';
 
+import Background from '~/components/Background';
 // import { Container } from './styles';
 
 export default function SignUp({ route, navigation }) {
@@ -9,7 +10,7 @@ export default function SignUp({ route, navigation }) {
   const { otherParam } = route.params;
 
   return (
-    <SafeAreaView>
+    <Background>
       <Text>Sign up</Text>
       <Text>itemId: {JSON.stringify(itemId)}</Text>
       <Text>otherParam: {JSON.stringify(otherParam)}</Text>
@@ -17,7 +18,7 @@ export default function SignUp({ route, navigation }) {
         title="Go to Details"
         onPress={() => navigation.navigate('SignIn', {})}
       />
-    </SafeAreaView>
+    </Background>
   );
 }
 
