@@ -37,7 +37,7 @@ export default function SignIn({ navigation }) {
 
           <SubmitButton onPress={() => {}}>Sign In</SubmitButton>
         </Form>
-        <SignLink onPress={() => {}}>
+        <SignLink onPress={() => navigation.navigate('SignUp')}>
           <SignLinkText>Sign up for GoBarber</SignLinkText>
         </SignLink>
       </Container>
