@@ -1,23 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SafeAreaView, Text, Button } from 'react-native';
+import { Image } from 'react-native';
 
-// import { Container } from './styles';
+import logo from '~/assets/logo.png';
+import Background from '~/components/Background';
+
+import {
+  Container,
+  Form,
+  FormInput,
+  SubmitButton,
+  SignLink,
+  SignLinkText,
+} from './styles';
 
 export default function SignIn({ navigation }) {
   return (
-    <SafeAreaView>
-      <Text>Sign in</Text>
-      <Button
-        title="Go to Details"
-        onPress={() =>
-          navigation.navigate('SignUp', {
-            itemId: 86,
-            otherParam: 'anything you want here',
-          })
-        }
-      />
-    </SafeAreaView>
+    <Background>
+      <Container>
+        <Image source={logo} />
+
+        <Form>
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Type your email"
+          />
+
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Type your password"
+          />
+
+          <SubmitButton onPress={() => {}}>Sign In</SubmitButton>
+        </Form>
+        <SignLink onPress={() => navigation.navigate('SignUp')}>
+          <SignLinkText>Sign up for GoBarber</SignLinkText>
+        </SignLink>
+      </Container>
+    </Background>
   );
 }
 

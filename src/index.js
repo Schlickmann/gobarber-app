@@ -1,8 +1,19 @@
 import 'react-native-gesture-handler';
-import * as React from 'react';
+import React, { useEffect } from 'react';
+import { StatusBar, Platform } from 'react-native';
+import SplashScreen from 'react-native-splash-screen';
 
 import Routes from '~/routes';
 
 export default function App() {
-  return <Routes />;
+  useEffect(() => {
+    SplashScreen.hide();
+  }, []);
+
+  return (
+    <>
+      {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+      <Routes />
+    </>
+  );
 }

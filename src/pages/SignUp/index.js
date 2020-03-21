@@ -1,34 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SafeAreaView, Text, Button } from 'react-native';
+import { Image } from 'react-native';
 
-// import { Container } from './styles';
+import logo from '~/assets/logo.png';
+import Background from '~/components/Background';
 
-export default function SignUp({ route, navigation }) {
-  const { itemId } = route.params;
-  const { otherParam } = route.params;
+import {
+  Container,
+  Form,
+  FormInput,
+  SubmitButton,
+  SignLink,
+  SignLinkText,
+} from './styles';
 
+export default function SignUp({ navigation }) {
   return (
-    <SafeAreaView>
-      <Text>Sign up</Text>
-      <Text>itemId: {JSON.stringify(itemId)}</Text>
-      <Text>otherParam: {JSON.stringify(otherParam)}</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('SignIn', {})}
-      />
-    </SafeAreaView>
+    <Background>
+      <Container>
+        <Image source={logo} />
+
+        <Form>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Type your full name"
+          />
+
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="Type your email"
+          />
+
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="Type your password"
+          />
+
+          <SubmitButton onPress={() => {}}>Sign In</SubmitButton>
+        </Form>
+        <SignLink onPress={() => navigation.navigate('SignIn')}>
+          <SignLinkText>Already have an account</SignLinkText>
+        </SignLink>
+      </Container>
+    </Background>
   );
 }
 
 SignUp.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
-  }).isRequired,
-  route: PropTypes.shape({
-    params: PropTypes.shape({
-      itemId: PropTypes.number,
-      otherParam: PropTypes.string,
-    }),
   }).isRequired,
 };
