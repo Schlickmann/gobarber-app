@@ -15,7 +15,8 @@ export default function usePersistedState(key, defaultValue) {
   }, [key, state]);
 
   async function getState() {
-    return JSON.parse(await AsyncStorage.getItem(key));
+    const response = await AsyncStorage.getItem(key);
+    return JSON.parse(response);
   }
 
   return [state, setState, getState];

@@ -2,7 +2,14 @@ import { Alert } from 'react-native';
 import api from '~/services/api';
 import { Types } from './reducer';
 
-const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
+const signIn = async (
+  email,
+  password,
+  setAuth,
+  getState,
+  updateAuthUser,
+  dispatch
+) => {
   try {
     const response = await api.post('/sessions', {
       email,
@@ -19,6 +26,7 @@ const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
       dispatch({
         type: Types.HANDLE_SIGN_IN_FAILURE,
       });
+      return;
     }
     dispatch({
       type: Types.HANDLE_SIGN_IN_SUCCESS,

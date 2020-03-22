@@ -38,7 +38,14 @@ const AuthProvider = ({ children }) => {
         type: Types.HANDLE_SIGN_IN_REQUEST,
       });
 
-      signIn(email, password, context.setAuth, updateAuthUser, dispatch);
+      signIn(
+        email,
+        password,
+        context.setAuth,
+        context.getState,
+        updateAuthUser,
+        dispatch
+      );
     },
     logOutRequest: () => {
       dispatch({
