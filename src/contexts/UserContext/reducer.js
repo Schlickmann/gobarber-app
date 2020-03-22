@@ -20,7 +20,6 @@ function reducer(state, action) {
     switch (action.type) {
       case Types.HANDLE_SIGN_IN_SUCCESS: {
         action.payload.context.setAuth({
-          ...action.payload.context.getState('@gobarber/authContext'),
           user: action.payload.user,
         });
         break;
@@ -46,7 +45,7 @@ function reducer(state, action) {
         draft.loading = false;
 
         action.payload.authContext.setAuth({
-          ...action.payload.authContext.getState('@gobarber/authContext'),
+          ...action.payload.authContext.getState('@gobarber/userContext'),
           user: action.payload.user,
         });
         break;

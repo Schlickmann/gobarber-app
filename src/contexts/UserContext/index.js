@@ -11,7 +11,7 @@ const { Provider } = userContext;
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
   const [auth, setAuth, getState] = usePersistedState(
-    '@gobarber/authContext',
+    '@gobarber/userContext',
     {}
   );
   const context = useMemo(() => {
