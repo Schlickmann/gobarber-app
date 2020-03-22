@@ -16,8 +16,10 @@ export default function App() {
   return (
     <UserProvider>
       <AuthProvider>
-        {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-        <Routes />
+        <>
+          {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+          <Routes />
+        </>
       </AuthProvider>
     </UserProvider>
   );
