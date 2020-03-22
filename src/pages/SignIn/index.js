@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 
+import { authContext } from '~/contexts/AuthContext';
 import logo from '~/assets/logo.png';
 import Background from '~/components/Background';
 
@@ -15,9 +16,12 @@ import {
 } from './styles';
 
 export default function SignIn({ navigation }) {
+  const { signInRequest, loading } = useContext(authContext);
   const passwordRef = useRef();
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    signInRequest('ff@gmail.com', '123456');
+  }
 
   return (
     <Background>
