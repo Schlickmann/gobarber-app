@@ -3,6 +3,8 @@ import React, { useEffect } from 'react';
 import { StatusBar, Platform } from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
 
+import '~/config/ReactotronConfig';
+
 import { AuthProvider } from './contexts/AuthContext';
 import { UserProvider } from '~/contexts/UserContext';
 // import { ScheduleProvider } from '~/contexts/ScheduleContext';

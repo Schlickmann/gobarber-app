@@ -1,5 +1,4 @@
-// import { toast } from 'react-toastify';
-
+import { Alert } from 'react-native';
 import api from '~/services/api';
 import { Types } from './reducer';
 
@@ -12,8 +11,11 @@ const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
 
     const { token, user } = response.data;
 
-    if (!user.provider) {
-      // toast.info('User is not a provider, please use the GoBarber mobile app.');
+    if (user.provider) {
+      Alert.alert(
+        'Sign In Failure',
+        'User is not a customer, please use the GoBarber web app.'
+      );
       dispatch({
         type: Types.HANDLE_SIGN_IN_FAILURE,
       });
@@ -27,7 +29,7 @@ const signIn = async (email, password, setAuth, updateAuthUser, dispatch) => {
 
     // history.push('/dashboard');
   } catch (error) {
-    // toast.error(error.response.data.error);
+    Alert.alert('Authentication Failure', error.response.data.error);
     dispatch({
       type: Types.HANDLE_SIGN_IN_FAILURE,
     });
@@ -45,7 +47,7 @@ const logOut = (setAuth, updateAuthUser, dispatch) => {
 
     // history.push('/');
   } catch (error) {
-    // toast.error('Something went wrong :(');
+    Alert.alert('Log out Failure', 'Something went wrong :(');
     dispatch({
       type: Types.HANDLE_LOG_OUT_FAILURE,
     });

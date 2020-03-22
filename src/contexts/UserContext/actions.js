@@ -1,4 +1,4 @@
-// import { toast } from 'react-toastify';
+import { Alert } from 'react-native';
 
 import api from '~/services/api';
 import { Types } from './reducer';
@@ -13,7 +13,7 @@ const signUp = async (name, email, password, dispatch) => {
     });
 
     if (response.status === 200) {
-      // toast.success('User added successfully');
+      Alert.alert('Sign Up', 'User added successfully');
 
       dispatch({
         type: Types.HANDLE_SIGN_UP_SUCCESS,
@@ -22,7 +22,7 @@ const signUp = async (name, email, password, dispatch) => {
       // history.push('/');
     }
   } catch (error) {
-    // toast.error(error.response.data.error);
+    Alert.alert('Sign Up Failure', error.response.data.error);
 
     dispatch({
       type: Types.HANDLE_SIGN_UP_FAILURE,
@@ -41,13 +41,13 @@ const updateUser = async (data, authContext, dispatch) => {
     };
 
     const response = await api.put('/users', user);
-    // toast.success('Profile updated successfully');
+    Alert.alert('Success', 'Profile updated successfully');
     dispatch({
       type: Types.HANDLE_UPDATE_SUCCESS,
       payload: { user: response.data, authContext },
     });
   } catch (error) {
-    // toast.error(error.response.data.error);
+    Alert.alert('Update Failure', error.response.data.error);
     dispatch({ type: Types.HANDLE_UPDATE_FAILURE });
   }
 };
