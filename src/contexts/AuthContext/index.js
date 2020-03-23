@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { signIn, logOut } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
-import { getData } from '~/utils/UsePersistedState';
+import { getData } from '~/utils/storage';
 import setHeader from '~/utils/functions/setHeader';
 import { userContext } from '~/contexts/UserContext';
 
