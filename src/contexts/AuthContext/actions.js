@@ -1,15 +1,11 @@
 import { Alert } from 'react-native';
+
+import { setData } from '~/utils/UsePersistedState';
+import setHeader from '~/utils/functions/setHeader';
 import api from '~/services/api';
 import { Types } from './reducer';
 
-const signIn = async (
-  email,
-  password,
-  setAuth,
-  getState,
-  updateAuthUser,
-  dispatch
-) => {
+const signIn = async (email, password, updateAuthUser, dispatch) => {
   try {
     const response = await api.post('/sessions', {
       email,
@@ -28,12 +24,20 @@ const signIn = async (
       });
       return;
     }
-    dispatch({
-      type: Types.HANDLE_SIGN_IN_SUCCESS,
-      payload: { token, setAuth },
+
+    await setData('@gobarber/authContext', {
+      token,
+      signed: true,
     });
 
-    updateAuthUser(user);
+    setHeader('Authorization', `Bearer ${token}`);
+
+    dispatch({
+      type: Types.HANDLE_SIGN_IN_SUCCESS,
+      payload: { token },
+    });
+
+    await updateAuthUser(user);
 
     // history.push('/dashboard');
   } catch (error) {
@@ -44,14 +48,15 @@ const signIn = async (
   }
 };
 
-const logOut = (setAuth, updateAuthUser, dispatch) => {
+const logOut = async (updateAuthUser, dispatch) => {
   try {
+    await setData('@gobarber/authContext', {});
+
     dispatch({
       type: Types.HANDLE_LOG_OUT_SUCCESS,
-      payload: { setAuth },
     });
 
-    updateAuthUser(null);
+    await updateAuthUser(null);
 
     // history.push('/');
   } catch (error) {
