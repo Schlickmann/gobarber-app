@@ -19,9 +19,7 @@ function reducer(state, action) {
   return produce(state, draft => {
     switch (action.type) {
       case Types.HANDLE_SIGN_IN_SUCCESS: {
-        action.payload.context.setAuth({
-          user: action.payload.user,
-        });
+        draft.user = action.payload.user;
         break;
       }
       case Types.HANDLE_SIGN_UP_REQUEST: {
@@ -43,11 +41,7 @@ function reducer(state, action) {
       }
       case Types.HANDLE_UPDATE_SUCCESS: {
         draft.loading = false;
-
-        action.payload.authContext.setAuth({
-          ...action.payload.authContext.getState('@gobarber/userContext'),
-          user: action.payload.user,
-        });
+        draft.user = action.payload.user;
         break;
       }
       case Types.HANDLE_UPDATE_FAILURE: {

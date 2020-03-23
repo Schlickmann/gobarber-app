@@ -16,7 +16,7 @@ const INITIAL_STATE = {
 };
 
 function reducer(state, action) {
-  return produce(state, async draft => {
+  return produce(state, draft => {
     switch (action.type) {
       case Types.HANDLE_SIGN_IN_REQUEST: {
         draft.loading = true;
@@ -26,11 +26,6 @@ function reducer(state, action) {
         draft.token = action.payload.token;
         draft.signed = true;
         draft.loading = false;
-
-        await action.payload.setAuth({
-          signed: true,
-          token: action.payload.token,
-        });
         break;
       }
       case Types.HANDLE_SIGN_IN_FAILURE: {
@@ -45,8 +40,6 @@ function reducer(state, action) {
         draft.token = null;
         draft.signed = false;
         draft.loading = false;
-
-        action.payload.setAuth({});
         break;
       }
       case Types.HANDLE_LOG_OUT_FAILURE: {

@@ -1,5 +1,6 @@
 import { Alert } from 'react-native';
 
+import { setData } from '~/utils/UsePersistedState';
 import api from '~/services/api';
 import { Types } from './reducer';
 
@@ -30,7 +31,7 @@ const signUp = async (name, email, password, dispatch) => {
   }
 };
 
-const updateUser = async (data, authContext, dispatch) => {
+const updateUser = async (data, dispatch) => {
   try {
     const { name, email, ...rest } = data;
 
@@ -42,9 +43,14 @@ const updateUser = async (data, authContext, dispatch) => {
 
     const response = await api.put('/users', user);
     Alert.alert('Success', 'Profile updated successfully');
+
+    await setData('@gobarber/authContext', {
+      user: response.data,
+    });
+
     dispatch({
       type: Types.HANDLE_UPDATE_SUCCESS,
-      payload: { user: response.data, authContext },
+      payload: { user: response.data },
     });
   } catch (error) {
     Alert.alert('Update Failure', error.response.data.error);
