@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { signUp, updateUser } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
-import { getData, setData } from '~/utils/UsePersistedState';
+import { getData, setData } from '~/utils/storage';
 
 const userContext = createContext(INITIAL_STATE);
 const { Provider } = userContext;

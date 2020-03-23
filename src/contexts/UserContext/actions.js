@@ -1,6 +1,6 @@
 import { Alert } from 'react-native';
 
-import { setData } from '~/utils/UsePersistedState';
+import { setData } from '~/utils/storage';
 import api from '~/services/api';
 import { Types } from './reducer';
 
