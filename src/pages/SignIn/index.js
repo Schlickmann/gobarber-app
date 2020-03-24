@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'react-native';
 
@@ -16,11 +16,14 @@ import {
 } from './styles';
 
 export default function SignIn({ navigation }) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   const { signInRequest, loading } = useContext(authContext);
   const passwordRef = useRef();
 
   function handleSubmit() {
-    signInRequest('ff@gmail.com', '123456');
+    signInRequest(email, password);
   }
 
   return (
@@ -37,6 +40,8 @@ export default function SignIn({ navigation }) {
             placeholder="Type your email"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
           />
 
           <FormInput
@@ -46,6 +51,8 @@ export default function SignIn({ navigation }) {
             ref={passwordRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
           />
 
           <SubmitButton onPress={handleSubmit}>Sign In</SubmitButton>

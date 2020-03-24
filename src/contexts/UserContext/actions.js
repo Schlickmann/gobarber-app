@@ -10,7 +10,6 @@ const signUp = async (name, email, password, dispatch) => {
       name,
       email,
       password,
-      provider: true,
     });
 
     if (response.status === 200) {
