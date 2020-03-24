@@ -8,9 +8,9 @@ import '~/config/ReactotronConfig';
 import { AuthProvider } from './contexts/AuthContext';
 import { UserProvider } from '~/contexts/UserContext';
 // import { ScheduleProvider } from '~/contexts/ScheduleContext';
-import Routes from '~/routes';
+import App from './App';
 
-export default function App() {
+export default function Index() {
   useEffect(() => {
     SplashScreen.hide();
   }, []);
@@ -20,7 +20,7 @@ export default function App() {
       <AuthProvider>
         <>
           {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-          <Routes />
+          <App />
         </>
       </AuthProvider>
     </UserProvider>
