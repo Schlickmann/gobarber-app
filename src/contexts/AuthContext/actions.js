@@ -1,11 +1,11 @@
 import { Alert } from 'react-native';
 
 import { setData } from '~/utils/storage';
-import setHeader from '~/utils/functions/setHeader';
+// import setHeader from '~/utils/functions/setHeader';
 import api from '~/services/api';
 import { Types } from './reducer';
 
-const signIn = async (email, password, updateAuthUser, dispatch) => {
+const signIn = async (email, password, updateAuthUser, dispatch, context) => {
   try {
     const response = await api.post('/sessions', {
       email,
@@ -25,12 +25,13 @@ const signIn = async (email, password, updateAuthUser, dispatch) => {
       return;
     }
 
-    await setData('@gobarber/authContext', {
-      token,
-      signed: true,
-    });
+    await context.setAuth({ token, signed: true });
+    // await setData('@gobarber/authContext', {
+    //   token,
+    //   signed: true,
+    // });
 
-    setHeader('Authorization', `Bearer ${token}`);
+    // setHeader('Authorization', `Bearer ${token}`);
 
     dispatch({
       type: Types.HANDLE_SIGN_IN_SUCCESS,
