@@ -16,7 +16,7 @@ const UserProvider = ({ children }) => {
   const value = {
     ...state,
     user: user || state.user,
-    storeUserRequest: (name, email, password) => {
+    signUpRequest: (name, email, password) => {
       dispatch({ type: Types.HANDLE_SIGN_UP_REQUEST });
       signUp(name, email, password, dispatch);
     },
