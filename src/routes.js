@@ -37,21 +37,28 @@ function Routes({ isSigned }) {
           },
         }}
       >
-        <Stack.Screen
-          options={{ header: () => null }}
-          name="SignIn"
-          component={SignIn}
-        />
-        <Stack.Screen
-          options={{ header: () => null }}
-          name="SignUp"
-          component={SignUp}
-        />
-        <Stack.Screen
-          options={{ header: () => null }}
-          name="Home"
-          component={Home}
-        />
+        {!isSigned ? (
+          <>
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="SignIn"
+              component={SignIn}
+            />
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="SignUp"
+              component={SignUp}
+            />
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              options={{ header: () => null }}
+              name="Home"
+              component={Home}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

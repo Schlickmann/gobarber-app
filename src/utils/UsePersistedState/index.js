@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 
 export default function usePersistedState(db, defaultValue) {
+  // AsyncStorage.clear();
   const [state, setState] = useState(defaultValue);
 
   useEffect(() => {
