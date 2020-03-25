@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { signIn, logOut } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
-// import { getData } from '~/utils/storage';
 import usePersistedState from '~/utils/UsePersistedState';
 import setHeader from '~/utils/functions/setHeader';
 import { userContext } from '~/contexts/UserContext';
@@ -14,10 +13,9 @@ const { Provider } = authContext;
 
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const [auth, setAuth, getState] = usePersistedState(
-    '@gobarber/authContext',
-    {}
-  );
+  const [auth, setAuth, getState] = usePersistedState('@gobarber/authContext', {
+    isRetrievingData: true,
+  });
   const context = useMemo(() => {
     if (auth.signed) {
       setHeader('Authorization', `Bearer ${auth.token}`);
@@ -25,25 +23,17 @@ const AuthProvider = ({ children }) => {
     return { auth, setAuth, getState };
   }, [auth, setAuth, getState]);
 
-  // const dbData = getData('@gobarber/authContext');
-  // if (dbData.signed) {
-  //   setHeader('Authorization', `Bearer ${dbData.token}`);
-  // }
-
   const { updateAuthUser } = useContext(userContext);
 
   const {
-    auth: { token, signed, loading },
+    auth: { token, signed, loading, isRetrievingData },
   } = context;
-
-  // const { token, signed, loading } = dbData;
-
-  // console.tron.warn('123:', dbData);
 
   const value = {
     token: token || state.token,
     signed: signed || state.signed,
     loading: loading || state.loading,
+    isRetrievingData: isRetrievingData || null,
     signInRequest: (email, password) => {
       dispatch({
         type: Types.HANDLE_SIGN_IN_REQUEST,
@@ -56,7 +46,7 @@ const AuthProvider = ({ children }) => {
         type: Types.HANDLE_LOG_OUT_REQUEST,
       });
 
-      logOut(updateAuthUser, dispatch);
+      logOut(updateAuthUser, dispatch, context);
     },
   };
 

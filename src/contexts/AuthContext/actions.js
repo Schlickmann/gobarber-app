@@ -1,7 +1,5 @@
 import { Alert } from 'react-native';
 
-import { setData } from '~/utils/storage';
-// import setHeader from '~/utils/functions/setHeader';
 import api from '~/services/api';
 import { Types } from './reducer';
 
@@ -26,12 +24,6 @@ const signIn = async (email, password, updateAuthUser, dispatch, context) => {
     }
 
     await context.setAuth({ token, signed: true });
-    // await setData('@gobarber/authContext', {
-    //   token,
-    //   signed: true,
-    // });
-
-    // setHeader('Authorization', `Bearer ${token}`);
 
     dispatch({
       type: Types.HANDLE_SIGN_IN_SUCCESS,
@@ -49,9 +41,9 @@ const signIn = async (email, password, updateAuthUser, dispatch, context) => {
   }
 };
 
-const logOut = async (updateAuthUser, dispatch) => {
+const logOut = async (updateAuthUser, dispatch, context) => {
   try {
-    await setData('@gobarber/authContext', {});
+    await context.setAuth({ token: null, signed: false });
 
     dispatch({
       type: Types.HANDLE_LOG_OUT_SUCCESS,
