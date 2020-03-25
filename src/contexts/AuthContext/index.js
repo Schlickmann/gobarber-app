@@ -25,20 +25,11 @@ const AuthProvider = ({ children }) => {
     return { auth, setAuth, getState };
   }, [auth, setAuth, getState]);
 
-  // const dbData = getData('@gobarber/authContext');
-  // if (dbData.signed) {
-  //   setHeader('Authorization', `Bearer ${dbData.token}`);
-  // }
-
   const { updateAuthUser } = useContext(userContext);
 
   const {
     auth: { token, signed, loading },
   } = context;
-
-  // const { token, signed, loading } = dbData;
-
-  // console.tron.warn('123:', dbData);
 
   const value = {
     token: token || state.token,
@@ -56,7 +47,7 @@ const AuthProvider = ({ children }) => {
         type: Types.HANDLE_LOG_OUT_REQUEST,
       });
 
-      logOut(updateAuthUser, dispatch);
+      logOut(updateAuthUser, dispatch, context);
     },
   };
 

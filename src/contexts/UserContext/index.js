@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { signUp, updateUser } from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
-// import { getData, setData } from '~/utils/storage';
 import usePersistedState from '~/utils/UsePersistedState';
 
 const userContext = createContext(INITIAL_STATE);
@@ -11,20 +10,17 @@ const { Provider } = userContext;
 
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-  const [auth, setAuth, getState] = usePersistedState(
-    '@gobarber/authContext',
+  const [authUser, setAuthUser, getState] = usePersistedState(
+    '@gobarber/userContext',
     {}
   );
   const context = useMemo(() => {
-    return { auth, setAuth, getState };
-  }, [auth, setAuth, getState]);
+    return { authUser, setAuthUser, getState };
+  }, [authUser, setAuthUser, getState]);
 
   const {
-    auth: { user },
+    authUser: { user },
   } = context;
-  // const dbData = getData('@gobarber/authContext');
-
-  // const { user } = dbData;
   const value = {
     ...state,
     user: user || state.user,
@@ -36,11 +32,11 @@ const UserProvider = ({ children }) => {
       dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
       updateUser(data, dispatch);
     },
-    updateAuthUser: async authUser => {
-      await setAuth({ user: authUser });
+    updateAuthUser: async userInfo => {
+      await setAuthUser({ user: userInfo });
       dispatch({
         type: Types.HANDLE_SIGN_IN_SUCCESS,
-        payload: { user: authUser },
+        payload: { user: userInfo },
       });
     },
   };
