@@ -6,9 +6,15 @@ export default function usePersistedState(db, defaultValue) {
 
   useEffect(() => {
     async function loadData() {
-      const response = await AsyncStorage.getItem(db);
-      if (response) {
-        setState(JSON.parse(response));
+      let response = await AsyncStorage.getItem(db);
+      response = JSON.parse(response);
+
+      if (Object.keys(response).length !== 0) {
+        if (!('isRetrievingData' in response)) {
+          setState(response);
+        } else {
+          setState({});
+        }
       }
     }
     loadData();
