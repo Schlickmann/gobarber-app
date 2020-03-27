@@ -28,6 +28,7 @@ function Routes({ isSigned }) {
       <Stack.Navigator
         initialRouteName={isSigned ? 'Home' : 'SignIn'}
         screenOptions={{
+          headerShown: false,
           headerStyle: {
             backgroundColor: Colors.primary,
           },
@@ -39,24 +40,12 @@ function Routes({ isSigned }) {
       >
         {!isSigned ? (
           <>
-            <Stack.Screen
-              options={{ header: () => null }}
-              name="SignIn"
-              component={SignIn}
-            />
-            <Stack.Screen
-              options={{ header: () => null }}
-              name="SignUp"
-              component={SignUp}
-            />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignUp} />
           </>
         ) : (
           <>
-            <Stack.Screen
-              options={{ header: () => null }}
-              name="Home"
-              component={Home}
-            />
+            <Stack.Screen name="Home" component={Home} />
           </>
         )}
       </Stack.Navigator>
