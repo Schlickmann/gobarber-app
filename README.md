@@ -11,20 +11,20 @@
 </h4>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Schlickmann/gobarber-webapp?color=%2304D361">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/Schlickmann/gobarber-app?color=%2304D361">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Schlickmann/gobarber-webapp">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/Schlickmann/gobarber-app">
 	
   <a href="https://www.linkedin.com/in/juliani-schlickmann-damasceno/" target="_blank">
     <img alt="Made by Schlickmann" src="https://img.shields.io/badge/made%20by-Schlickmann-%2304D361">
   </a>
 
-  <a href="https://github.com/Schlickmann/gobarber-webapp/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Schlickmann/gobarber-webapp">
+  <a href="https://github.com/Schlickmann/gobarber-app/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/Schlickmann/gobarber-app">
   </a>
 
-  <a href="https://github.com/Schlickmann/gobarber-webapp/issues">
-    <img alt="Repository issues" src="https://img.shields.io/github/issues/Schlickmann/gobarber-webapp">
+  <a href="https://github.com/Schlickmann/gobarber-app/issues">
+    <img alt="Repository issues" src="https://img.shields.io/github/issues/Schlickmann/gobarber-app">
   </a>
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
