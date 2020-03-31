@@ -7,7 +7,7 @@ export const Container = styled.SafeAreaView`
 
 export const Title = styled.Text`
   font-size: 20px;
-  color: ${Colors.light};
+  color: ${Colors.secondary};
   font-weight: bold;
   align-self: center;
   margin-top: 30px;
