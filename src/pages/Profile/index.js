@@ -43,7 +43,7 @@ function Profile() {
     if (user) {
       loadUserInfo();
     }
-  }, []);
+  }, [user]);
 
   function handleSubmit() {
     const data = {

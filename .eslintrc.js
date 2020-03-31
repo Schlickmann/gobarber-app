@@ -25,6 +25,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "import/no-cycle": "off",
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
+    "no-return-assign": "off",
     "react/jsx-one-expression-per-line": "off",
     "global-require": "off",
     "react-native/no-raw-text": "off",
