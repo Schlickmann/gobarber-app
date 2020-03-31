@@ -1,5 +1,5 @@
-import { Alert } from 'react-native';
-
+import { navigate } from '~/navigation/RootNavigation';
+import Alert from '~/components/Alert';
 import api from '~/services/api';
 import { Types } from './reducer';
 
@@ -12,16 +12,16 @@ const signUp = async (name, email, password, dispatch) => {
     });
 
     if (response.status === 200) {
-      Alert.alert('Sign Up', 'User added successfully');
+      await Alert('Sign Up', 'User added successfully');
 
       dispatch({
         type: Types.HANDLE_SIGN_UP_SUCCESS,
       });
 
-      // history.push('/');
+      navigate('SignIn');
     }
   } catch (error) {
-    Alert.alert('Sign Up Failure', error.response.data.error);
+    await Alert('Sign Up Failure', error.response.data.error);
 
     dispatch({
       type: Types.HANDLE_SIGN_UP_FAILURE,
@@ -40,7 +40,7 @@ const updateUser = async (data, setAuthUser, dispatch) => {
     };
 
     const response = await api.put('/users', user);
-    Alert.alert('Success', 'Profile updated successfully');
+    await Alert('Success', 'Profile updated successfully');
 
     await setAuthUser({ user: response.data });
 
@@ -49,7 +49,7 @@ const updateUser = async (data, setAuthUser, dispatch) => {
       payload: { user: response.data },
     });
   } catch (error) {
-    Alert.alert('Update Failure', error.response.data.error);
+    await Alert('Update Failure', error.response.data.error);
     dispatch({ type: Types.HANDLE_UPDATE_FAILURE });
   }
 };

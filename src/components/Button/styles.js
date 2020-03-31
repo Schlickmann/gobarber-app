@@ -5,7 +5,7 @@ import Colors from '~/styles/colors';
 
 export const Container = styled(RectButton)`
   height: 46px;
-  background-color: ${Colors.secondary};
+  background-color: ${props => props.color};
   border-radius: 4px;
 
   align-items: center;
@@ -13,7 +13,8 @@ export const Container = styled(RectButton)`
 `;
 
 export const Text = styled.Text`
-  color: ${Colors.light};
+  color: ${props =>
+    props.color === Colors.light ? Colors.primary : Colors.light};
   font-weight: bold;
 
   font-size: 16px;

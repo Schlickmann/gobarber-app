@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import { navigationRef, isMountedRef } from '~/navigation/RootNavigation';
 
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
@@ -47,9 +49,17 @@ function Home() {
   );
 }
 
+// Main Component
+
 function Routes({ isSigned }) {
+  useEffect(() => {
+    isMountedRef.current = true;
+
+    return () => (isMountedRef.current = false);
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={isSigned ? 'Home' : 'SignIn'}
         screenOptions={{
