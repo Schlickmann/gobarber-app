@@ -12,17 +12,22 @@ import {
   SubmitButton,
 } from './styles';
 
-export default function Profile() {
+function Profile() {
+  // User Context
+  const { updateUserRequest, user, loading } = useContext(userContext);
+
+  // Field's reference
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const oldPasswordRef = useRef();
+  const passwordConfirmationRef = useRef();
+
+  // States
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const { updateUserRequest, user, loading } = useContext(userContext);
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const oldPasswordRef = useRef();
-  const confirmPasswordRef = useRef();
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   useEffect(() => {
     function loadUserProfile() {
@@ -34,7 +39,19 @@ export default function Profile() {
   }, [user.email, user.name]);
 
   function handleSubmit() {
-    // updateUserRequest(name, email, password);
+    const data = {
+      name,
+      email,
+      password,
+      oldPassword,
+      passwordConfirmation,
+    };
+
+    updateUserRequest(data);
+
+    setOldPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
   }
 
   return (
@@ -85,7 +102,7 @@ export default function Profile() {
             placeholder="Type your new password"
             ref={passwordRef}
             returnKeyType="next"
-            onSubmitEditing={() => confirmPasswordRef.current.focus()}
+            onSubmitEditing={() => passwordConfirmationRef.current.focus()}
             value={password}
             onChangeText={setPassword}
           />
@@ -94,11 +111,11 @@ export default function Profile() {
             icon="lock-outline"
             secureTextEntry
             placeholder="Type your new password confirmation"
-            ref={confirmPasswordRef}
+            ref={passwordConfirmationRef}
             returnKeyType="send"
             onSubmitEditing={handleSubmit}
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
+            value={passwordConfirmation}
+            onChangeText={setPasswordConfirmation}
           />
 
           <SubmitButton loading={loading} onPress={handleSubmit}>
@@ -109,3 +126,5 @@ export default function Profile() {
     </Background>
   );
 }
+
+export default Profile;

@@ -30,7 +30,7 @@ const UserProvider = ({ children }) => {
     },
     updateUserRequest: data => {
       dispatch({ type: Types.HANDLE_UPDATE_REQUEST });
-      updateUser(data, dispatch);
+      updateUser(data, setAuthUser, dispatch);
     },
     updateAuthUser: async userInfo => {
       await setAuthUser({ user: userInfo });

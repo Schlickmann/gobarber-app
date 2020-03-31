@@ -8,7 +8,8 @@ import { appointmentContext } from '~/contexts/AppointmentContext';
 import Colors from '~/styles/colors';
 import { Container, Left, Avatar, Info, Name, Time } from './styles';
 
-export default function Appointment({ data }) {
+function Appointment({ data }) {
+  // Appointment Context
   const { cancelAppointmentRequest } = useContext(appointmentContext);
 
   return (
@@ -54,3 +55,5 @@ Appointment.propTypes = {
     }),
   }).isRequired,
 };
+
+export default Appointment;
