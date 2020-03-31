@@ -23,20 +23,17 @@ function Profile() {
   const passwordConfirmationRef = useRef();
 
   // States
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   useEffect(() => {
-    function loadUserProfile() {
-      setEmail(user.email);
-      setName(user.name);
-    }
-
-    loadUserProfile();
-  }, [user.email, user.name]);
+    setOldPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
+  }, [user]);
 
   function handleSubmit() {
     const data = {
@@ -48,10 +45,6 @@ function Profile() {
     };
 
     updateUserRequest(data);
-
-    setOldPassword('');
-    setPassword('');
-    setPasswordConfirmation('');
   }
 
   return (
