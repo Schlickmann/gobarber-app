@@ -7,7 +7,7 @@ import '~/config/ReactotronConfig';
 
 import { AuthProvider } from './contexts/AuthContext';
 import { UserProvider } from '~/contexts/UserContext';
-// import { ScheduleProvider } from '~/contexts/ScheduleContext';
+import { AppointmentProvider } from '~/contexts/AppointmentContext';
 import App from './App';
 
 export default function Index() {
@@ -18,10 +18,12 @@ export default function Index() {
   return (
     <UserProvider>
       <AuthProvider>
-        <>
-          {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
-          <App />
-        </>
+        <AppointmentProvider>
+          <>
+            {Platform.OS === 'ios' && <StatusBar barStyle="light-content" />}
+            <App />
+          </>
+        </AppointmentProvider>
       </AuthProvider>
     </UserProvider>
   );
