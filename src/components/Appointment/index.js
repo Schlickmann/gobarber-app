@@ -13,7 +13,6 @@ export default function Appointment({ data }) {
 
   return (
     <Container past={data.past} cancelable={data.cancelable}>
-      {console.tron.log(data.past, data.cancelable)}
       <Left>
         <Avatar
           source={{

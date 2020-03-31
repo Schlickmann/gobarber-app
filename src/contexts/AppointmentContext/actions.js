@@ -15,8 +15,6 @@ const getAppointments = async (data, dispatch) => {
       }),
     }));
 
-    console.tron.log(appointments);
-
     dispatch({
       type: Types.HANDLE_APPOINTMENT_SUCCESS,
       payload: { appointments },
