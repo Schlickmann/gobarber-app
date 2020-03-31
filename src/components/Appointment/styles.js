@@ -1,0 +1,43 @@
+import styled from 'styled-components/native';
+import Colors from '~/styles/colors';
+
+export const Container = styled.View`
+  margin-bottom: 15px;
+  padding: 20px;
+  border-radius: 4px;
+  background-color: ${Colors.light};
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const Left = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Avatar = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+`;
+
+export const Info = styled.View`
+  margin-left: 15px;
+`;
+
+export const Name = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: ${Colors.dark};
+`;
+
+export const Time = styled.Text`
+  color: ${Colors.secondary};
+  font-size: 13px;
+  margin-top: 4px;
+`;
