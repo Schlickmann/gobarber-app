@@ -12,17 +12,22 @@ import {
   SubmitButton,
 } from './styles';
 
-export default function Profile() {
+function Profile() {
+  // User Context
+  const { updateUserRequest, user, loading } = useContext(userContext);
+
+  // Field's reference
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const oldPasswordRef = useRef();
+  const passwordConfirmationRef = useRef();
+
+  // States
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const { updateUserRequest, user, loading } = useContext(userContext);
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const oldPasswordRef = useRef();
-  const passwordConfirmationRef = useRef();
 
   useEffect(() => {
     function loadUserProfile() {
@@ -43,6 +48,10 @@ export default function Profile() {
     };
 
     updateUserRequest(data);
+
+    setOldPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
   }
 
   return (
@@ -117,3 +126,5 @@ export default function Profile() {
     </Background>
   );
 }
+
+export default Profile;

@@ -15,13 +15,18 @@ import {
   SignLinkText,
 } from './styles';
 
-export default function SignUp({ navigation }) {
+function SignUp({ navigation }) {
+  // User Context
+  const { signUpRequest, loading } = useContext(userContext);
+
+  // Field Reference
+  const emailRef = useRef();
+  const passwordRef = useRef();
+
+  // States
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { signUpRequest, loading } = useContext(userContext);
-  const emailRef = useRef();
-  const passwordRef = useRef();
 
   function handleSubmit() {
     signUpRequest(name, email, password);
@@ -85,3 +90,5 @@ SignUp.propTypes = {
     navigate: PropTypes.func,
   }).isRequired,
 };
+
+export default SignUp;

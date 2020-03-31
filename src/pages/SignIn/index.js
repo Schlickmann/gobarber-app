@@ -15,12 +15,16 @@ import {
   SignLinkText,
 } from './styles';
 
-export default function SignIn({ navigation }) {
+function SignIn({ navigation }) {
+  // Auth Context
+  const { signInRequest, loading } = useContext(authContext);
+
+  // Field Reference
+  const passwordRef = useRef();
+
+  // States
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const { signInRequest, loading } = useContext(authContext);
-  const passwordRef = useRef();
 
   function handleSubmit() {
     signInRequest(email, password);
@@ -72,3 +76,5 @@ SignIn.propTypes = {
     navigate: PropTypes.func,
   }).isRequired,
 };
+
+export default SignIn;

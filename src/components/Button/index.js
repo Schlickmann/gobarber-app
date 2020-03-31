@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Colors from '~/styles/colors';
 import { Container, Text } from './styles';
 
-export default function Button({ children, loading, ...rest }) {
+function Button({ children, loading, ...rest }) {
   return (
     <Container {...rest}>
       {loading ? (
@@ -24,3 +24,5 @@ Button.propTypes = {
 Button.defaultProps = {
   loading: false,
 };
+
+export default Button;

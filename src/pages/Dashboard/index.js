@@ -9,7 +9,8 @@ import Appointment from '~/components/Appointment';
 
 import { Container, Title, List } from './styles';
 
-export default function Dashboard() {
+function Dashboard() {
+  // Contexts
   const { user } = useContext(userContext);
   const { appointments, appointmentsRequest } = useContext(appointmentContext);
 
@@ -36,3 +37,5 @@ export default function Dashboard() {
     </Background>
   );
 }
+
+export default Dashboard;
