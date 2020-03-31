@@ -15,6 +15,8 @@ import {
   SignLinkText,
 } from './styles';
 
+import Colors from '~/styles/colors';
+
 function SignIn({ navigation }) {
   // Auth Context
   const { signInRequest, loading } = useContext(authContext);
@@ -59,7 +61,11 @@ function SignIn({ navigation }) {
             onChangeText={setPassword}
           />
 
-          <SubmitButton loading={loading} onPress={handleSubmit}>
+          <SubmitButton
+            color={Colors.secondary}
+            loading={loading}
+            onPress={handleSubmit}
+          >
             Sign In
           </SubmitButton>
         </Form>

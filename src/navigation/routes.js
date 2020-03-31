@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import { navigationRef } from '~/navigation/RootNavigation';
+
 import SignIn from '~/pages/SignIn';
 import SignUp from '~/pages/SignUp';
 import Dashboard from '~/pages/Dashboard';
@@ -47,9 +49,11 @@ function Home() {
   );
 }
 
+// Main Component
+
 function Routes({ isSigned }) {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={isSigned ? 'Home' : 'SignIn'}
         screenOptions={{

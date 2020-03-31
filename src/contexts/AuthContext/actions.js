@@ -1,5 +1,4 @@
-import { Alert } from 'react-native';
-
+import Alert from '~/components/Alert';
 import api from '~/services/api';
 import { Types } from './reducer';
 
@@ -13,7 +12,7 @@ const signIn = async (email, password, updateAuthUser, dispatch, context) => {
     const { token, user } = response.data;
 
     if (user.provider) {
-      Alert.alert(
+      await Alert(
         'Sign In Failure',
         'User is not a customer, please use the GoBarber web app.'
       );
@@ -31,10 +30,8 @@ const signIn = async (email, password, updateAuthUser, dispatch, context) => {
     });
 
     await updateAuthUser(user);
-
-    // history.push('/dashboard');
   } catch (error) {
-    Alert.alert('Authentication Failure', error.response.data.error);
+    await Alert('Authentication Failure', error.response.data.error);
     dispatch({
       type: Types.HANDLE_SIGN_IN_FAILURE,
     });
@@ -50,10 +47,8 @@ const logOut = async (updateAuthUser, dispatch, context) => {
     });
 
     await updateAuthUser(null);
-
-    // history.push('/');
   } catch (error) {
-    Alert.alert('Log out Failure', 'Something went wrong :(');
+    await Alert('Log out Failure', 'Something went wrong :(');
     dispatch({
       type: Types.HANDLE_LOG_OUT_FAILURE,
     });

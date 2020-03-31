@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ActivityIndicator } from 'react-native';
 
 import { authContext } from '~/contexts/AuthContext';
-import Routes from '~/routes';
+import Routes from '~/navigation/routes';
 
 import Background from '~/components/Background';
 import Colors from '~/styles/colors';

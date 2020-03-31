@@ -1,6 +1,7 @@
 import React, { useRef, useState, useContext, useEffect } from 'react';
 
 import { userContext } from '~/contexts/UserContext';
+import { authContext } from '~/contexts/AuthContext';
 import Background from '~/components/Background';
 
 import {
@@ -10,10 +11,14 @@ import {
   FormInput,
   Separator,
   SubmitButton,
+  LogOutButton,
 } from './styles';
 
+import Colors from '~/styles/colors';
+
 function Profile() {
-  // User Context
+  // Contexts
+  const { logOutRequest } = useContext(authContext);
   const { updateUserRequest, user, loading } = useContext(userContext);
 
   // Field's reference
@@ -23,17 +28,22 @@ function Profile() {
   const passwordConfirmationRef = useRef();
 
   // States
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
   useEffect(() => {
-    setOldPassword('');
-    setPassword('');
-    setPasswordConfirmation('');
-  }, [user]);
+    function loadUserInfo() {
+      setName(user.name);
+      setEmail(user.email);
+    }
+
+    if (user) {
+      loadUserInfo();
+    }
+  }, []);
 
   function handleSubmit() {
     const data = {
@@ -45,6 +55,14 @@ function Profile() {
     };
 
     updateUserRequest(data);
+
+    setOldPassword('');
+    setPassword('');
+    setPasswordConfirmation('');
+  }
+
+  function handleLogOut() {
+    logOutRequest();
   }
 
   return (
@@ -111,9 +129,20 @@ function Profile() {
             onChangeText={setPasswordConfirmation}
           />
 
-          <SubmitButton loading={loading} onPress={handleSubmit}>
+          <SubmitButton
+            color={Colors.secondary}
+            loading={loading}
+            onPress={handleSubmit}
+          >
             Update Profile
           </SubmitButton>
+          <LogOutButton
+            color={Colors.light}
+            loading={loading}
+            onPress={handleLogOut}
+          >
+            Log Out
+          </LogOutButton>
         </Form>
       </Container>
     </Background>
