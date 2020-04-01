@@ -51,11 +51,9 @@ function Appointment() {
       />
       <Stack.Screen
         options={({ navigation }) => ({
-          title: 'Select one provider',
+          title: 'Select date and time',
           headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('SelectProvider')}
-            >
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <Icon name="chevron-left" size={24} color={Colors.light} />
             </TouchableOpacity>
           ),
@@ -63,7 +61,18 @@ function Appointment() {
         name="SelectDateTime"
         component={SelectDateTime}
       />
-      <Stack.Screen name="Confirmation" component={Confirmation} />
+      <Stack.Screen
+        options={({ navigation }) => ({
+          title: 'Confirm Appointment',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="chevron-left" size={24} color={Colors.light} />
+            </TouchableOpacity>
+          ),
+        })}
+        name="Confirmation"
+        component={Confirmation}
+      />
     </Stack.Navigator>
   );
 }
