@@ -42,14 +42,27 @@ function Appointment() {
           title: 'Select one provider',
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.navigate('Dashboard')}>
-              <Icon name="chevron-left" size={20} color={Colors.light} />
+              <Icon name="chevron-left" size={24} color={Colors.light} />
             </TouchableOpacity>
           ),
         })}
         name="SelectProvider"
         component={SelectProvider}
       />
-      <Stack.Screen name="SelectDateTime" component={SelectDateTime} />
+      <Stack.Screen
+        options={({ navigation }) => ({
+          title: 'Select one provider',
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SelectProvider')}
+            >
+              <Icon name="chevron-left" size={24} color={Colors.light} />
+            </TouchableOpacity>
+          ),
+        })}
+        name="SelectDateTime"
+        component={SelectDateTime}
+      />
       <Stack.Screen name="Confirmation" component={Confirmation} />
     </Stack.Navigator>
   );
@@ -69,6 +82,7 @@ function Home() {
       <Tab.Screen
         options={{
           tabBarLabel: 'Appointments',
+          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Icon name="event" size={20} color={color} />
           ),
@@ -80,6 +94,7 @@ function Home() {
         options={{
           tabBarVisible: false,
           tabBarLabel: 'Book',
+          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Icon name="add-circle-outline" size={20} color={color} />
           ),
@@ -90,6 +105,7 @@ function Home() {
       <Tab.Screen
         options={{
           tabBarLabel: 'Profile',
+          // eslint-disable-next-line react/prop-types
           tabBarIcon: ({ color }) => (
             <Icon name="person" size={20} color={color} />
           ),
