@@ -101,6 +101,7 @@ function Home() {
       />
       <Tab.Screen
         options={{
+          unmountOnBlur: true,
           tabBarVisible: false,
           tabBarLabel: 'Book',
           // eslint-disable-next-line react/prop-types
