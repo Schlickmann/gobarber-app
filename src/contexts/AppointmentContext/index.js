@@ -1,7 +1,11 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 
-import { getAppointments, cancelAppointment } from './actions';
+import {
+  getAppointments,
+  cancelAppointment,
+  storeAppointment,
+} from './actions';
 import { reducer, INITIAL_STATE, Types } from './reducer';
 
 const appointmentContext = createContext(INITIAL_STATE);
@@ -25,6 +29,13 @@ const AppointmentProvider = ({ children }) => {
       });
 
       cancelAppointment(id, dispatch);
+    },
+    storeAppointmentRequest: data => {
+      dispatch({
+        type: Types.HANDLE_STORE_REQUEST,
+      });
+
+      storeAppointment(data, dispatch);
     },
   };
 

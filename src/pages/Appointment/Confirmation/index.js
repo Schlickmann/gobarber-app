@@ -1,15 +1,15 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { formatRelative, parseISO } from 'date-fns';
 
-import api from '~/services/api';
-import Alert from '~/components/Alert';
+import { appointmentContext } from '~/contexts/AppointmentContext';
 import Background from '~/components/Background';
 import Colors from '~/styles/colors';
 
 import { Container, Avatar, Name, Time, SubmitButton } from './styles';
 
-export default function Confirmation({ route, navigation }) {
+export default function Confirmation({ route }) {
+  const { loading, storeAppointmentRequest } = useContext(appointmentContext);
   const { provider, time } = route.params;
 
   const dateFormatted = useMemo(
@@ -17,19 +17,8 @@ export default function Confirmation({ route, navigation }) {
     [time]
   );
 
-  async function handleSubmit() {
-    try {
-      await api.post('/appointments', { provider_id: provider.id, date: time });
-
-      await Alert('Appointment Success', 'Appointment booked successfully');
-
-      navigation.navigate('Dashboard');
-    } catch (error) {
-      await Alert(
-        'Appointment Failure',
-        'Something went wrong, please try again later'
-      );
-    }
+  function handleSubmit() {
+    storeAppointmentRequest({ id: provider.id, time });
   }
 
   return (
@@ -48,7 +37,7 @@ export default function Confirmation({ route, navigation }) {
 
         <SubmitButton
           color={Colors.secondary}
-          // loading={loading}
+          loading={loading}
           onPress={handleSubmit}
         >
           Book Now
@@ -70,8 +59,5 @@ Confirmation.propTypes = {
       }),
       time: PropTypes.string,
     }),
-  }).isRequired,
-  navigation: PropTypes.shape({
-    navigate: PropTypes.func,
   }).isRequired,
 };
