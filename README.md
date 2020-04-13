@@ -54,6 +54,7 @@ This project was developed with the following technologies:
 ## 💻 Project
 
 <p>GoBarber is an application to help Providers (hairdresser and barbers) to control their schedule. Also, giving the flexibility of customers to schedule their appointment with their preferred professional.</p>
+
 ## 🔖 Layout
 
 <table>
